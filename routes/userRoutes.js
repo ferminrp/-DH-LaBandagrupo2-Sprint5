@@ -9,14 +9,16 @@ const uploadFile = require('../middlewares/multerUserMiddleware')
 const validations = require('../middlewares/validateRegisterMiddleware');
 
 
-//Procesar el registro
-router.post('/register', /*upload.single('imagen'),*/ validations, userController.processRegister);
-
 //Mostrar el register
 router.get('/register', /*guest midlleware*/userController.showRegister);
 
+//Procesar el registro
+router.post('/register', uploadFile.single('imagen'), validations, userController.processRegister);
+
+
+
 //formulario de login
-router.get('/login', userController.show);
+router.get('/login', userController.login);
 
 // Procesar el login
 //router.post('/login', usersController.loginProcess);

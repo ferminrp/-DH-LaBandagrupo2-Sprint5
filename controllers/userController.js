@@ -13,20 +13,20 @@ const {
 let userController = {
 	
 
-		show: (req, res) => {
+		/*show: (req, res) => {
 
-				res.render('users/login');
+				res.render('login');
 			
-		},
+		},*/
 
 		showRegister: (req, res) => {
 
-			res.render('users/register');
+		return	res.render('register');
 		
 		},
 
 
-		store: (req, res) => {
+		/*store: (req, res) => {
 			console.log(req.files);
 			// Atrapa los contenidos del formulario... Ponele
 			const user = req.body;
@@ -36,18 +36,19 @@ let userController = {
 			// console.log(user);
 			// Cuidado sólo mando el cuerpo del FORM, el Id me lo asigna el Modelo  
 			userModel.create(user);
-			res.redirect('/');
-		},
+			res.redirect('/');*/
+		//},
 		
-		register: (req, res) => {
-			return res.render('userRegisterForm');
-		},
+		//Ya lo declaramos en el showregister
+		/*register: (req, res) => {
+			return res.render('register');
+		},*/
 		
 		processRegister: (req, res) => {
 			const resultValidation = validationResult(req);
 	
 			if (resultValidation.errors.length > 0) {
-				return res.render('users/register', {
+				return res.render('../views/users/register', {
 					errors: resultValidation.mapped(),
 					oldData: req.body
 				});
@@ -56,7 +57,7 @@ let userController = {
 			let userInDB = User.findByField('email', req.body.email);
 	
 			if (userInDB) {
-				return res.render('users/register', {
+				return res.render('../views/users/register', {
 					errors: {
 						email: {
 							msg: 'Este email ya está registrado'
@@ -69,12 +70,12 @@ let userController = {
 			let userToCreate = {
 				...req.body,
 				password: bcryptjs.hashSync(req.body.password, 10),
-				avatar: req.file.filename
+				imagen: req.file.filename
 			}
 	
 			let userCreated = User.create(userToCreate);
 	
-			return res.redirect('/user/login');
+			return res.redirect('/login');
 		},
 
 		editUserScreen : (req, res) => {
@@ -86,7 +87,7 @@ let userController = {
 		},
 		
 		login: (req, res) => {
-			return res.render('userLoginForm');
+			return res.render('/login');
 		},
 		
 		loginProcess: (req, res) => {
