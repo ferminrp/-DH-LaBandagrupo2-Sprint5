@@ -8064,5 +8064,13 @@
   "password": "w",
   "pass_confirm": "w",
   "imagen": ""
+ },
+ {
+  "id": 1010,
+  "name": "pirulo",
+  "email": "pirulo@pirulo.com",
+  "password": "$2a$10$1CQcJvhgrTxMMJn7TzZU8eswEytrAMdExP3TmYjZLGokVwyqjda/6",
+  "pass_confirm": "123456789",
+  "imagen": "img-1622299602883.jpg"
  }
 ]

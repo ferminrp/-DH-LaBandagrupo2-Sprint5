@@ -1,8 +1,10 @@
+//Definamos el Bcrypt
+const bcryptjs = require('bcryptjs');
 // ESTO SERIA EL GESTOR DEL MODELO
 const jsonDB = require('../model/userModel');
 
 // Maneja todos los métodos para PRODUCTO, que lo pasa como parámetro
-const userModel = jsonDB('../data/user');
+const userModel = jsonDB('../data/users');
 
 //Traigo el validator desde el middleware
 const {
@@ -21,7 +23,7 @@ let userController = {
 
 		showRegister: (req, res) => {
 
-		return	res.render('register');
+		return	res.render('users/register');
 		
 		},
 
@@ -36,8 +38,8 @@ let userController = {
 			// console.log(user);
 			// Cuidado sólo mando el cuerpo del FORM, el Id me lo asigna el Modelo  
 			userModel.create(user);
-			res.redirect('/');*/
-		//},
+			res.redirect('/');
+		}*/
 		
 		//Ya lo declaramos en el showregister
 		/*register: (req, res) => {
@@ -48,16 +50,16 @@ let userController = {
 			const resultValidation = validationResult(req);
 	
 			if (resultValidation.errors.length > 0) {
-				return res.render('../views/users/register', {
+				return res.render('users/register', {
 					errors: resultValidation.mapped(),
 					oldData: req.body
 				});
 			}
 	
-			let userInDB = User.findByField('email', req.body.email);
+			let userInDB = userModel.findByField('email', req.body.email);
 	
 			if (userInDB) {
-				return res.render('../views/users/register', {
+				return res.render('users/register', {
 					errors: {
 						email: {
 							msg: 'Este email ya está registrado'
@@ -73,7 +75,7 @@ let userController = {
 				imagen: req.file.filename
 			}
 	
-			let userCreated = User.create(userToCreate);
+			let userCreated = userModel.create(userToCreate);
 	
 			return res.redirect('/login');
 		},
